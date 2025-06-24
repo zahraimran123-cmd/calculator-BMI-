@@ -1,0 +1,80 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BMI Calculator</title>
+  <style>
+    h2 {
+      text-align: center;
+    }
+    body {
+      background-image: url(6-11_Meaning-of-Sunflowers_Images.jpg);
+      justify-content: center;
+      font-family: Arial, Helvetica, sans-serif;
+      display: flex;
+      align-items: center;
+      height: 100vh;
+    }
+    div {
+      text-align: center;
+      background-color: rgb(250, 250, 92);
+      height: 300px;
+      border-radius: 6px;
+      width: 400px;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="a">
+  <h2>BMI Calculator</h2>
+  <hr>
+  <label for="weight">Weight (kg):</label>
+  <input type="number" id="weight" step="0.1" required><br><br>
+
+  <label for="height">Height (m):</label>
+  <input type="number" id="height" step="0.01" required><br><br>
+
+  <button onclick="calculateBMI()">Calculate BMI</button>
+  <button onclick="resetFields()">Reset</button>
+  <hr>
+
+  <h3 id="result"></h3>
+</div>
+
+<script>
+  function calculateBMI() {
+    const weight = parseFloat(document.getElementById("weight").value);
+    const height = parseFloat(document.getElementById("height").value);
+
+    if (!weight || !height || height <= 0) {
+      document.getElementById("result").innerText = "Please enter valid weight and height.";
+      return;
+    }
+
+    const bmi = weight / (height * height);
+    let category = "";
+
+    if (bmi < 18.5) {
+      category = "Underweight";
+    } else if (bmi < 24.9) {
+      category = "Normal weight";
+    } else if (bmi < 29.9) {
+      category = "Overweight";
+    } else {
+      category = "Obese";
+    }
+
+    document.getElementById("result").innerText = `Your BMI is ${bmi.toFixed(2)} (${category})`;
+  }
+
+  function resetFields() {
+    document.getElementById("weight").value = "";
+    document.getElementById("height").value = "";
+    document.getElementById("result").innerText = "";
+  }
+</script>
+
+</body>
+</html>
